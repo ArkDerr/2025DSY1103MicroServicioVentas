@@ -65,6 +65,7 @@ public class ventaController {
         }
     }
 
+    //Endpoint para guardar ventas
     @PostMapping
     public ResponseEntity<?> GuardarVenta(@RequestBody venta ventaguardar){
         try{
