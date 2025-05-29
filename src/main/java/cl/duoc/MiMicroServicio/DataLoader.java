@@ -25,7 +25,8 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception{
         for (int i=0; i < 10; i++){
             venta nuevaventa = new venta();
-            nuevaventa.setRutusuario(faker.name().firstName());
+            //nuevaventa.setRutusuario(faker.name().firstName());
+            nuevaventa.setRutusuario(generarRutFalso());
             nuevaventa.setFechaventa(LocalDate.now().minusDays(random.nextInt(60)));
 
             ventaservice.GuardarVenta(nuevaventa);
@@ -33,21 +34,22 @@ public class DataLoader implements CommandLineRunner {
         }
     }
 
-    private String generarRutFalso(){
+    private String generarRutFalso() {
         int cuerpo = 10000000 + random.nextInt(8999999);
-        int dv = calculardv(cuerpo);
-        return cuerpo+"-"+(dv == 10 ? "k" : dv);
-
-
+        String dv = calculardv(cuerpo);
+        return cuerpo + "-" + dv;
     }
 
-    private int calculardv(int cuerpo){
+    private String calculardv(int cuerpo) {
         int m = 0, s = 1;
-        while(cuerpo !=0){
-            s=(s + cuerpo % 10 * (9 - m++ % 6)) % 11;
-            cuerpo /=10;
+        while (cuerpo != 0) {
+            s = (s + cuerpo % 10 * (9 - m++ % 6)) % 11;
+            cuerpo /= 10;
         }
-        return s !=0 ? s + 47 :75;
+
+        if (s == 0) return "K";
+        if (s == 1) return "0";
+        return String.valueOf(11 - s);
     }
 
 }
