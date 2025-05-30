@@ -16,14 +16,12 @@ import jakarta.transaction.Transactional;
 public class ventaService {
 
     private final WebClient webClient;
+    private final ventaRepository ventarepository;
 
-    public ventaService(WebClient webClient) {
+    public ventaService(WebClient webClient, ventaRepository ventarepository) {
         this.webClient = webClient;
+        this.ventarepository = ventarepository;
     }
-
-    @Autowired
-    private ventaRepository ventarepository;
-
 
     public UsuarioDTO BuscarUsuario(String rut){
         UsuarioDTO usuario = webClient.get()

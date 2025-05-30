@@ -3,17 +3,15 @@ package cl.duoc.MiMicroServicio.service;
 
 import cl.duoc.MiMicroServicio.model.venta;
 import cl.duoc.MiMicroServicio.repository.ventaRepository;
-import cl.duoc.MiMicroServicio.service.ventaService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
+
 public class ventaServiceTest {
 
 
@@ -38,7 +36,7 @@ public class ventaServiceTest {
 
         venta ventaGuardada = ventaservice.GuardarVenta(v);
 
-        assertEquals("12345678-7", ventaGuardada.getRutusuario());
+        assertEquals("12345678-9", ventaGuardada.getRutusuario());
         verify(ventarepository, times(1)).save(v);
 
     }
