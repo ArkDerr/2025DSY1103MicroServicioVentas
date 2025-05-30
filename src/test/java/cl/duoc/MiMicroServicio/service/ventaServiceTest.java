@@ -1,0 +1,49 @@
+package cl.duoc.MiMicroServicio.service;
+
+
+import cl.duoc.MiMicroServicio.model.venta;
+import cl.duoc.MiMicroServicio.repository.ventaRepository;
+import cl.duoc.MiMicroServicio.service.ventaService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.*;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.time.LocalDate;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+@SpringBootTest
+public class ventaServiceTest {
+
+
+    @Mock
+    private ventaRepository ventarepository;
+
+    @InjectMocks
+    private ventaService ventaservice;
+
+    @BeforeEach
+    public void setUp(){
+        MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    public void testGuardarVenta(){
+        venta v = new venta();
+        v.setFechaventa(LocalDate.now());
+        v.setRutusuario("12345678-9");
+
+        when(ventarepository.save(any())).thenReturn(v);
+
+        venta ventaGuardada = ventaservice.GuardarVenta(v);
+
+        assertEquals("12345678-7", ventaGuardada.getRutusuario());
+        verify(ventarepository, times(1)).save(v);
+
+    }
+
+
+
+
+}
