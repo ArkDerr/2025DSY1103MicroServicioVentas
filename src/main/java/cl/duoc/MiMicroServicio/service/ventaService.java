@@ -37,16 +37,16 @@ public class ventaService {
         return ventarepository.findAll();
     }
 
-    public venta BuscarUnaVenta(Long idventa){
-        return ventarepository.findById(idventa).get();
+    public venta BuscarUnaVenta(int idventa){
+        return ventarepository.findById((long) idventa).get();
     }
 
     public venta GuardarVenta(venta venta){
         return ventarepository.save(venta);
     }
 
-    public void EliminarVenta(Long idventa){
-        ventarepository.deleteById(idventa);
+    public void EliminarVenta(int idventa){
+        ventarepository.deleteById((long) idventa);
     }
 
 }

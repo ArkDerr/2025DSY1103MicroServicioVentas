@@ -39,7 +39,7 @@ public class ventaController {
     }
 
     @GetMapping("/{idventa}")
-    public ResponseEntity<?> BuscarVenta(@PathVariable Long idventa){
+    public ResponseEntity<?> BuscarVenta(@PathVariable int idventa){
         try {
             venta ventabuscada = ventaservice.BuscarUnaVenta(idventa);
             return ResponseEntity.ok(ventabuscada);
@@ -49,7 +49,7 @@ public class ventaController {
     }
 
     @GetMapping("/VentaUsuario/{idventa}")
-    public ResponseEntity<?> DatosVentaUsuario(@PathVariable Long idventa){
+    public ResponseEntity<?> DatosVentaUsuario(@PathVariable int idventa){
         try {
             venta ventabuscada = ventaservice.BuscarUnaVenta(idventa);
             UsuarioDTO usuarioVenta = ventaservice.BuscarUsuario(ventabuscada.getRutusuario());
@@ -77,7 +77,7 @@ public class ventaController {
     }
 
     @DeleteMapping("/{idventa}")
-    public ResponseEntity<String> EliminarVenta(@PathVariable Long idventa){
+    public ResponseEntity<String> EliminarVenta(@PathVariable int idventa){
         try {
             venta ventabuscada = ventaservice.BuscarUnaVenta(idventa);
             ventaservice.EliminarVenta(idventa);
@@ -88,7 +88,7 @@ public class ventaController {
     }
 
     @PutMapping("/{idventa}")
-    public ResponseEntity<?> ActualizarVenta(@PathVariable Long idventa, @RequestBody venta ventaactualizar){
+    public ResponseEntity<?> ActualizarVenta(@PathVariable int idventa, @RequestBody venta ventaactualizar){
         try {
             venta ventaactualizada = ventaservice.BuscarUnaVenta(idventa);
             ventaactualizada.setRutusuario(ventaactualizar.getRutusuario());

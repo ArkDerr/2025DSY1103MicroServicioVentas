@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class VentaUsuarioDTO {
 
-    private Long idventa;
+    private int idventa;
     private String rutusuario;
     private LocalDate fechaventa;
     private String nombre;
