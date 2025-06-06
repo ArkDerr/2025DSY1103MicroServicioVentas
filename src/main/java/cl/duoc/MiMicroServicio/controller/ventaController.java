@@ -17,11 +17,14 @@ import cl.duoc.MiMicroServicio.DTO.UsuarioDTO;
 import cl.duoc.MiMicroServicio.DTO.VentaUsuarioDTO;
 import cl.duoc.MiMicroServicio.model.venta;
 import cl.duoc.MiMicroServicio.service.ventaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
 @RequestMapping("/api/v1/Ventas")
+@Tag(name = "Ventas", description = "Endpoints para trabajar las ventas")
 public class ventaController {
 
 
