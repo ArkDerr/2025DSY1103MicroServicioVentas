@@ -17,6 +17,11 @@ import cl.duoc.MiMicroServicio.DTO.UsuarioDTO;
 import cl.duoc.MiMicroServicio.DTO.VentaUsuarioDTO;
 import cl.duoc.MiMicroServicio.model.venta;
 import cl.duoc.MiMicroServicio.service.ventaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.web.bind.annotation.PutMapping;
@@ -32,6 +37,15 @@ public class ventaController {
     private ventaService ventaservice;
 
     @GetMapping
+    @Operation(summary = "Ventas", description = "Operación que lista todas las ventas")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Se listaron correctamente las ventas",
+            content = @Content(mediaType = "application/json",
+                                schema = @Schema(implementation = venta.class))),
+        @ApiResponse(responseCode = "404", description = "No se encontro ninguna venta",
+                content = @Content(mediaType = "application/json",
+                schema = @Schema(type = "string", example = "no se encuentran Datos")))
+    })
     public ResponseEntity<?> ListarVentas(){
         List<venta> ventas = ventaservice.BuscarTodaVenta();
         if (ventas.isEmpty()) {
