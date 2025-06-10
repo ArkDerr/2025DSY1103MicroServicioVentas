@@ -26,7 +26,7 @@ public class venta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IDVENTA")
-    @Schema(description = "Codigo de la venta", example = "1")
+    @Schema(description = "Codigo de la venta autogenerado", accessMode = Schema.AccessMode.READ_ONLY)
     private int idventa;
 
     @Column(name = "RUTUSUARIO", nullable = false, length = 15)
