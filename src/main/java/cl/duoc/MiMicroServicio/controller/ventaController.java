@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import cl.duoc.MiMicroServicio.Assembler.VentaModelAssembler;
 import cl.duoc.MiMicroServicio.DTO.UsuarioDTO;
 import cl.duoc.MiMicroServicio.DTO.VentaUsuarioDTO;
 import cl.duoc.MiMicroServicio.model.venta;
@@ -38,6 +39,9 @@ public class ventaController {
 
     @Autowired
     private ventaService ventaservice;
+
+    @Autowired
+    private VentaModelAssembler assembler;
 
     //Endpoint para buscar todas las ventas
     @GetMapping
@@ -76,7 +80,7 @@ public class ventaController {
     public ResponseEntity<?> BuscarVenta(@PathVariable int idventa){
         try {
             venta ventabuscada = ventaservice.BuscarUnaVenta(idventa);
-            return ResponseEntity.ok(ventabuscada);
+            return ResponseEntity.ok(assembler.toModel(ventabuscada));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encuentran Venta");
         }
