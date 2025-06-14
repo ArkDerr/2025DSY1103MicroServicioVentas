@@ -59,7 +59,7 @@ public class ventaController {
         if (ventas.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encuentran Datos");
         } else {
-            return ResponseEntity.ok(ventas);
+            return ResponseEntity.ok(assembler.toCollectionModel(ventas));
         }    
     }
 
@@ -118,7 +118,7 @@ public class ventaController {
     public ResponseEntity<?> GuardarVenta(@RequestBody venta ventaguardar){
         try{
             venta ventaregistrar = ventaservice.GuardarVenta(ventaguardar);
-            return ResponseEntity.ok(ventaregistrar);
+            return ResponseEntity.ok(assembler.toModel(ventaregistrar));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("No se puede registrar la venta");
         }
@@ -169,7 +169,7 @@ public class ventaController {
             ventaactualizada.setRutusuario(ventaactualizar.getRutusuario());
             ventaactualizada.setFechaventa(ventaactualizar.getFechaventa());
             ventaservice.GuardarVenta(ventaactualizada);
-            return ResponseEntity.ok(ventaactualizada);
+            return ResponseEntity.ok(assembler.toModel(ventaactualizada));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Venta no esta registrada");
         }

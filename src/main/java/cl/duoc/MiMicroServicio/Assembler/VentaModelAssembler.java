@@ -19,10 +19,10 @@ public class VentaModelAssembler implements RepresentationModelAssembler<venta, 
     public EntityModel<venta> toModel(venta v){
         return EntityModel.of(
             v,
-            linkTo(methodOn(ventaController.class).BuscarVenta(v.getIdventa())).withSelfRel(),
+            linkTo(methodOn(ventaController.class).BuscarVenta(v.getIdventa())).withRel("Lista-la-venta-buscada"),
             linkTo(methodOn(ventaController.class).ListarVentas()).withRel("Todas-las-ventas"),
             linkTo(methodOn(ventaController.class).EliminarVenta(v.getIdventa())).withRel("Elimina-una-venta"),
-            linkTo(methodOn(ventaController.class).ActualizarVenta(v.getIdventa(), v)).withRel("Actualiza-una-venta")
+            linkTo(methodOn(ventaController.class).ActualizarVenta(v.getIdventa(), v)).withRel("Actualizar-una-venta")
         );
     }
 }
